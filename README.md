@@ -2,6 +2,6 @@
 
 访问域名
 
-terrell-2022.github.io
+https://terrell-ten.github.io/terrell-2022.github.io
 
 测试一下新的访问静态页面
