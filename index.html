@@ -5,11 +5,78 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+      var vConsole = new window.VConsole();
+    </script>
   </head>
+  
+  
   <body>
     <div id="app"></div>
     <div>你好，hello my html 改一下</div>
     <a href="http://filedev.520shq.com/acbdaf0e-0301-4521-87ea-cdc99a988562微信图片_20220120141535.zip" download="微信图片_20220120141535.zip">下载东东</a>
-    <script type="module" src="/src/main.js"></script>
+    <a onclick="xiazi()">下载东东3</a>
+    <a onclick="xiazi2()">下载文件流</a>
+    <!-- <script type="module" src="/src/main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      let downlurl = "http://filedev.520shq.com/acbdaf0e-0301-4521-87ea-cdc99a988562微信图片_20220120141535.zip";
+      function xiazi(){
+          // axios({
+          //   method:'post',
+          //   url:downlurl,
+          //   responseType: "blob"
+          // }).then(res=>{
+          //   console.log(res,'获取数据');
+          //   downloadFun(res.data,'文件名称',res.data.type);
+          // })
+          aDownlad(downlurl,'wenjian2');
+          
+      }      
+      function xiazi2(){
+        axios({
+          method:'post',
+          // url:'http://127.0.0.1:8848/terrell-2022.github.io/index.html',
+          url:downlurl,
+          responseType: "blob"
+        }).then(res=>{
+          console.log(res,'获取数据');
+          downloadFun(res.data,'文件名称',res.data.type);
+        })
+      }
+      
+      function aDownlad(url, fileName) {
+          const link = document.createElement('a')
+          link.href = url
+          
+          link.target = '_blank'
+          link.download = fileName
+          link.style.display = 'none'
+          document.body.append(link)
+          link.click()
+      }
+      
+      
+      function downloadFun(blobFile, fileName,type){
+         let blob = new Blob([blobFile], {
+           // type: "application/type;charset=UTF-8",
+           type: type,
+         })
+         console.log(blob);
+         console.log(blob.type);
+         // if (window.navigator.msSaveOrOpenBlob) {
+         //   navigator.msSaveBlob(blob, fileName)
+         // } else {
+           var link = document.createElement("a")
+           link.href = window.URL.createObjectURL(blob)
+           link.download = fileName
+           link.click()
+           window.URL.revokeObjectURL(link.href) //释放内存
+         // }
+       }
+    </script>
   </body>
+  
+  
 </html>
