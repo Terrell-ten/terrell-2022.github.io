@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>svg 乱搞</title>
+    <style>
+      body{
+        background-color: #999;
+      }
+    </style>
+    <script src="js/jq3.4.js"></script>
+  </head>
+  <body>
+    <div>
+      春风习习同庆春；喜气洋洋共迎喜； 欢度春节
+      一元复始门心皆水；万象更新物我同春； 万象更新
+      <div class="div" style="background-color: #0d5;">
+        <!-- <svg  xmlns="http://www.w3.org/2000/svg" width="240" height="240">
+          
+          <path id="xuxian2" d="M10 10 C90 20 120 150 10 200" stroke="rgb(0,150,255)"   style="stroke:black; fill:none;" width="5px" stroke-width="6" stroke-linecap="round" 
+           stroke-dasharray="0 350"
+           stroke-dashoffset="0"/>
+          <path id="xuxian3" d="M10 10 C240 00 200 200 10 200" stroke="rgb(0,150,255)"  fill-opacity="0.0" stroke-width="6" stroke-linecap="round" 
+           stroke-dasharray="0 350"
+           stroke-dashoffset="0"/>
+          <path class="xuxian" d="M10 10 T60 20 130 120 220 180" stroke="rgb(0,0,255)"  fill-opacity="0.0" stroke-width="6" stroke-linecap="round"
+           stroke-dasharray="0 350"
+           stroke-dashoffset="0"
+           />
+        </svg> -->
+        
+        <svg  xmlns="http://www.w3.org/2000/svg" width="240" height="240">
+          <!-- <path  class="xuxian" d="M10 10 T20 30 30 30 40 60 50 50 60 20 70 30 80 40 90 70 80 90 70 80" stroke="rgb(0,0,255)"  fill-opacity="0.0" stroke-width="6" stroke-linecap="round"
+           /> -->
+           <path 
+              class="xuxian5_"
+              stroke-dasharray="1500"
+            d="M10 80
+              T110 68
+              80 80
+              90 100
+              80 115
+              85 130
+              131 140
+              C70 140 70 100  80 10
+              C100 60 70 100  10 190
+              C20 190 50 90  150 180
+              C160 170 150 130  10 200
+                 " stroke="#697"  fill-opacity="0.0" stroke-width="6" stroke-linecap="round"
+            >
+            <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20"></feOffset>
+           </path>
+        </svg>
+        <svg  xmlns="http://www.w3.org/2000/svg" width="240" height="240">
+          <!-- <path  class="xuxian" d="M10 10 T20 30 30 30 40 60 50 50 60 20 70 30 80 40 90 70 80 90 70 80" stroke="rgb(0,0,255)"  fill-opacity="0.0" stroke-width="6" stroke-linecap="round"
+           /> -->
+           <!-- 林 -->
+           <!-- <path 
+              class="xuxian5"
+              stroke-dasharray="1200"
+            d="M10 80 
+                      T50 68
+                      65 15
+                      45 100 
+                      20 180
+                      80 86
+                      135 10
+                      110 110
+                      95 180
+                      105 95
+                      165 160
+                 " stroke="rgb(0,150,255)"  fill-opacity="0.0" stroke-width="6" stroke-linecap="round"
+            /> -->
+           
+        </svg>
+      </div>
+      <div class="div2" style="background-color: #fff;display: inline-block;">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="1000" height="240">
+          <circle 
+            id="circle1"
+            cx="100" cy="100" r="60" 
+            stroke="grey" 
+            stroke-width="12" 
+            fill="none"
+            stroke-dasharray="190"
+            stroke-dashoffset="-190"
+            stroke-linecap="round"
+          ></circle>
+          <circle
+            cx="100" cy="100" r="60" 
+            stroke="gold" 
+            stroke-width="12" 
+            fill="none"
+            stroke-dasharray="95 190"
+            stroke-dashoffset="-190"
+            stroke-linecap="round"
+          ></circle>
+          <path id="p1" d="M100,200 Q200 100 300 200 T 500 200" stroke="green" fill="none"></path>
+          <text
+           class="xuxian5"
+           stroke-dasharray="2"
+           
+           x="00" y="100"  fill="none" style="font-size: 34px;font-family:'宋体';" stroke-width="1"  stroke="gold" >
+           <textPath xlink:href="#p1">
+              文字测试的 
+           </textPath>
+           </text>
+        </svg>
+      </div>
+      
+        
+        M = moveto 移动到某点。<br>
+        L = lineto 画一条直线到某点。<br>
+        H = horizontal lineto 画一条水平线到某点。<br>
+        V = vertical lineto 画一条垂直线到某点。<br>
+        Q = quadratic Bézier curveto 二次贝塞尔曲线<br>
+        T = smooth quadratic Bézier curveto 平滑二次贝塞尔曲线<br>
+        C = curveto 三次贝塞尔曲线<br>
+        S = smooth curveto 平滑三次贝塞尔曲线<br>
+        A = elliptical Arc 弧形<br>
+        Z = closepath 从结束点到开始点画一条直线，形成一个闭合的区域。<br>
+        
+        枂 者 （读者驿站）
+        分享自己每天的感想，每天限制30人发言，先到先发言（广告站主可以直接删除，当天删的可以留出多余的留言位置）
+        分享后不会直接显示出来，只有打开的时候会随机显示出来，（要不要做一个ip分析的进行推送呢？没那个技术算了。
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+          <path d="M100 0 A100 100 0 0 1 200 100 " stroke="lime" stroke-width="3" fill-opacity="0.5" />
+          <path d="M100 100 A100 100 0 1 1 200 200 " stroke="lime" stroke-width="3" fill-opacity="0.5" />
+        </svg> -->
+      
+    </div>
+    
+    
+    <script>
+      
+      let num = 0;
+      let num2 = 0;
+      let numOf = true;
+      
+      
+      setInterval(()=>{
+        if(numOf){
+          num+=2
+        }else{
+          num-=2
+        }
+        if(num>100){
+          numOf = false;
+        }
+        if(num<=0){
+          numOf = true;
+        }
+        let numb = num/100
+        $(".xuxian").attr('stroke-dasharray',(numb*350)+' 350');
+        $("#xuxian2").attr('stroke-dasharray',(numb*400)+' 400');
+        $("#xuxian3").attr('stroke-dasharray',(numb*350)+' 350');
+        
+        num2++
+        if(num2>1000){
+          num2=0
+        }
+        $(".xuxian5").attr('stroke-dashoffset',-num2*25-$(".xuxian5").attr('stroke-dasharray'));
+        
+        
+      },60)
+      
+      
+      
+      
+    </script>
+  </body>
+</html>

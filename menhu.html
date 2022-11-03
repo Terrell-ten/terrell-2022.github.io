@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>照片展示厅</title>
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+      .img-flex{
+        background-color: antiquewhite;
+        padding: 10px;
+        vertical-align: top;
+      }
+      .img-border{
+        vertical-align: top;
+        box-sizing: border-box;
+        border: 10px solid #fff;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+      .box-title{
+        background-color: #fff;
+        line-height: 1.6;
+        padding-bottom: 10px;
+      }
+      .box-title-b{
+        padding: 0;
+        padding-top: 10px;
+      }
+      .img-flex-lf{
+        display: flex;
+        align-items: stretch;
+      }
+      .img-flex-lf .box-title{
+        writing-mode: vertical-lr;
+        padding-right: 10px;
+      }
+      .img-flex-lf .box-title-r{
+        padding: 0;
+        padding-left: 10px;
+      }
+      
+      .img-flex-lf .box-title{
+        
+      }
+      
+      .box-img{
+        background-color: #666;
+      }
+    </style>
+    
+    
+  </head>
+  <body>
+    <div class="img-flex">
+      <div style="display: inline-block;">
+        <div class="img-flex-lf img-border">
+          <div class="box-title">倾斜而下，需要的是来自远方的...</div>
+          <div class="box-img" style="width: 400px;height: 350px;"></div>
+        </div>
+      </div>
+      <div style="display: inline-block;">
+        <div class="img-flex-lf img-border">
+          <div class="box-img" style="width: 400px;height: 350px;"></div>
+          <div class="box-title box-title-r">倾斜而下，需要的是来自远方的...</div>
+        </div>
+      </div>
+      <div class="img-flex-tb img-border">
+        <div class="box-title" >行走在路上，看到的是...</div>
+        <div class="box-img"  style="width: 400px;height: 350px;"></div>
+      </div>
+      <div class="img-flex-tb img-border">
+        <div class="box-img"  style="width: 400px;height: 350px;"></div>
+        <div class="box-title box-title-b" >行走在路上，看到的是...</div>
+      </div>
+    </div>
+    
+    
+  </body>
+</html>

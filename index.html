@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
     <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script>
       var vConsole = new window.VConsole();
+      
+      
+      
+      
     </script>
   </head>
   
@@ -19,6 +25,153 @@
     <a onclick="xiazi()">下载东东3</a>
     <a onclick="xiazi2()">下载文件流</a>
     <!-- <script type="module" src="/src/main.js"></script> -->
+    
+    <button onclick="get_blob_url()"> 支付测试</button>
+    
+    
+    
+    <!-- <div class="popup" id="popupdemo" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;min-height: 600px;">
+      <div class="popup-moban" style="background-color: #333;opacity: .4;width: 100%;height: 100%;position: absolute;top: 0;left: 0;"></div>
+      <div class="popup-box" style="width: 400px;border-radius: 10px;background-color: #fff;position: absolute;top: 60px;left: 50%;margin-left: -200px;">
+        <div class="popup-top" style="display: flex;justify-content: space-between; align-items: center;padding:8px 10px 12px;">
+          <div class="popup-title">微信扫码付款</div>
+          <div class="popup-out" style="font-size: 26px;line-height: 26px;cursor:pointer;">&times;</div>
+        </div>
+        <div class="popup-cont" style="background-color: #2dac37;text-align: center;padding: 46px 0 76px;">
+          <div class="img-title" style="font-size: 22px;padding-bottom: 16px;color: #fff;">
+            <span>支付金额：</span>
+            <span style="color: #ffcc89;">￥1000</span>
+          </div>
+          <div class="img-box" style="width: 260px;height: 260px;padding: 8px;background-color: #fff;margin: auto;">
+            <img src="blob:http://pfts.520shq.com:8080/e5eadb23-97b7-4e76-b4c4-2ede862767fc" alt="" style="width: 100%;height: 100%;">
+          </div>
+        </div>
+        <div class="popup-botton" style="text-align: right;padding: 16px;">
+          <button style="background: #2dac37;border: 1px solid #dcdfe6;color: #fff;padding: 6px 12px;border-radius: 4px;">已完成支付</button>
+          <button style="background: #fff;border: 1px solid #dcdfe6;padding: 6px 12px;border-radius: 4px;margin-left: 10px;">关闭</button>
+        </div>
+      </div>
+    </div> -->
+    
+    
+    <img src="" alt="" id="isImg" style="max-width: 300px;height: 300px;">
+    <script>
+      
+      function get_blob_a(){
+        $.ajax({
+          // beforeSend: function (xhr) {
+          //   xhr.setRequestHeader("PsiAuth", 'eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wid2hvbGVzYWxlclNlcVwiOlwiNDY0MTcyNlwiLFwid2hvbGVzYWxlcklkXCI6Nzc4MyxcImlzU3ViQWNjb3VudFwiOmZhbHNlLFwidXNlcklkXCI6Nzc4MyxcImFjY291bnRcIjpcIjEzNTAwMDA5NTEzXCIsXCJ1c2VybmFtZVwiOlwi6ZmI6buYXCJ9IiwianRpIjoiTW1Rd09UTXpNakF0WXpBek1TMDBOVEUyTFRnME1tWXRPRGczWm1JeVlXWmlaak01IiwiZXhwIjoxNjYzMzc0MzgzfQ.aP2J7iROQQ9E8tO5TQL70_qBfvmIB8FrPCduHIkZ1Wf6u79PytE3zZmJQ8FWDvzLXSN3nJTyWZEYW2i0inCyQw36OzpZhZbdxZA8OkBrsxrJS9yKN5jWZ-0Lu3fgbUrwrT2a9HBxpPKNkSfH_rv3E9F9JNhteia9sINZ4sm2pVZp9AvXq7iLJMm8P3_P3FGw5hirn-tCX5jsSkbGK_yWvlOSo_hzAnJHcfPlFsPdAjcYnjZOHjThN5mS5X5RF0Ug3Phd9KG4MEvCURuTE2tMv2apsdrcHJL3ufyTcX5nhmBzH6APvd6veAluy4bOzd3X44C26k8_h8LMmYLyg5T0Mw');
+          // },
+          headers:{
+            PsiAuth:"eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wid2hvbGVzYWxlclNlcVwiOlwiNDY0MTcyNlwiLFwid2hvbGVzYWxlcklkXCI6Nzc4MyxcImlzU3ViQWNjb3VudFwiOmZhbHNlLFwidXNlcklkXCI6Nzc4MyxcImFjY291bnRcIjpcIjEzNTAwMDA5NTEzXCIsXCJ1c2VybmFtZVwiOlwi6ZmI6buYXCJ9IiwianRpIjoiTkRJeU9HWTRaREl0TjJaaE1DMDBaVGhpTFRoaVptSXRNR1UzWldWaU9USmxZemt6IiwiZXhwIjoxNjYzNDMwNTU0fQ.GGmxH5aBTUeDERmjpvTdjhM1_IOJrJJ6zV3jfTRUqxjpTprz8cwoiuT2UfEaqhUCtCyVSW8iBakHKsFuOp-Wcl7ukNeXmPlat34D7MTcQQNNBOgnWAkXJhxohmMGDgNempj7K1z8AykTiQWjINEyV97x7ot3GYSYEzv1LgMe5HE2fKXGQwJkbVJal4A7Li9wnW7tceErm0h_Dl37h9dZmcbusfqrFW3jZL4ZChRLZevU7Aw46hEvD1IaIDxMsH9wEdFVMKjhB8Ygm6ToV11gK6qpUvMHWBIjUWf8HP6UfWKVnPvI3YVrvX1VCv_eiAeEg_dPa4QvcdTdKb3NVveWnw"
+          },
+          url:'http://qypfts.520shq.com/qypfs-admin-psi-server/psi/qrCode/creatQRCodeByUrl?orderNumber=121212121212&url=http:%2F%2Fpfts.520shq.com%2Fhtml5%2Fproject%2Findex.html%23%2Fblock%2Fpaypage2%3FtotalOrderSn%3DQ2022062118463406846417260021%26totalOrderPrice%3D280000.00%26seq%3D4641726',
+          type:'get',
+          xhrFields:{
+            responseType:'blob'
+          },
+          
+          success:function(res){
+            console.log(res,'正常的');
+          },
+          error:function(err){
+            console.log(err,'不正常的');
+          }
+        })
+      }
+      
+      
+      
+      
+      
+      let pay_num = 1400; // 显示需要支付金额
+      let isStart = false; // 是否可以开启添加支付功能( 防止连续点击 )
+      // 获取支付二维码图片
+      function get_blob_url(params){ // 传参数 
+        if(isStart){return console.log('已经开启支付功能')}
+        isStart = true; // 
+        let param = {
+          url:'http://pfts.520shq.com/html5/project/index.html#/block/paypage2?totalOrderSn=Q2022062118463406846417260021&totalOrderPrice=280000.00&seq=4641726',
+          orderNumber:''
+        }
+        
+        param.url = encodeURIComponent(param.url);
+        let xhr = new XMLHttpRequest();
+        // 请求方式和接口 
+        // xhr.open('GET','http://qypfts.520shq.com/qypfs-admin-psi-server/psi/qrCode/creatQRCodeByUrl?');
+        xhr.open('GET','http://qypfts.520shq.com/qypfs-admin-psi-server/psi/qrCode/creatQRCodeByUrl?orderNumber='+param.orderNumber+'&url='+param.url+'');
+        // 请求开头
+        xhr.setRequestHeader('PsiAuth', 'eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wid2hvbGVzYWxlclNlcVwiOlwiNDM0MjQ4M1wiLFwid2hvbGVzYWxlcklkXCI6NDg5LFwiaXNTdWJBY2NvdW50XCI6ZmFsc2UsXCJ1c2VySWRcIjo0ODksXCJhY2NvdW50XCI6XCIxMzUwMDAwMjA1MFwiLFwidXNlcm5hbWVcIjpcIuW5v-W3nuWNjumhueWFrOWPuOWPt1wifSIsImp0aSI6Ik5qUTFZakJsWVRBdFpXRmpOUzAwTTJVeUxXRTRPVEF0T1dJM05ERTNOakprT1dKayIsImV4cCI6MTY2MzcwNjM2N30.N25wKyo1xtjyjkc16VV1HPJZ5AHv8EcqU6hFk8Q8DPI0V8f80846_4Iivnwo4Px-98MlsZxzozPq4pAGmmNmkEROKYDmV_WeWcKVvnXQXEpRq8VpJ8OroETBXblxOX0u-KpSf41T1iYBPwNyhZPYPl-9pB_gJ9H5BQ53Psd74q32RpZxwMX0Owgck3nB5z4DPmpFlzET0Hcu6KmuZnTRdPNQDxsslcPWK8pkK-hI35fj-64xGthC2VlZX9tVhBi1Yl5Q7YuL_jR9GOsC7-RRDNvjfHlXtKSMpfnKeVR32A35_HMhn47fc6t5hQ59ZWexjcxVSzLyFtSyMZS_tmN5pA');
+        xhr.responseType = 'blob';
+        xhr.send(JSON.stringify(param))
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState===XMLHttpRequest.DONE){
+            // 生成的图片地址
+            const url_r = window.URL.createObjectURL(xhr.response);
+            console.log(url_r,'获取请求数据url')
+            console.log($('#isImg'));
+            Start_Pay(url_r,pay_num);
+            isStart = false;
+            // $('#isImg').attr('src',url_r);
+          }
+        }
+      }
+      
+      /** 
+      * 显示支付二维码，参数1：img图片地址，pay_num 支付金额
+       **/
+      function Start_Pay(img,pay_num){
+        let dome = $(`
+          <div class="popup" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;overflow: auto;">
+            <div class="popup-moban" style="background-color: #333;opacity: .4;width: 100%;height: 100%;min-height:611px;position: absolute;top: 0;left: 0;"></div>
+            <div class="popup-box" style="width: 400px;border-radius: 10px;background-color: #fff;position: relative;margin: auto;margin-top: 60px;">
+              <div class="popup-top" style="display: flex;justify-content: space-between; align-items: center;padding:8px 10px 12px;">
+                <div class="popup-title">微信扫码付款</div>
+                <div class="popup-out" style="font-size: 26px;line-height: 26px;cursor:pointer;">&times;</div>
+              </div>
+              <div class="popup-cont" style="background-color: #2dac37;text-align: center;padding: 46px 0 76px;">
+                <div class="img-title" style="font-size: 22px;padding-bottom: 16px;color: #fff;">
+                  <span>支付金额：</span>
+                  <span style="color: #ffcc89;">￥${pay_num}</span>
+                </div>
+                <div class="img-box" style="width: 260px;height: 260px;padding: 8px;background-color: #fff;margin: auto;">
+                  <img class="wxImg" src="" alt="${img}" style="width: 100%;height: 100%;">
+                </div>
+              </div>
+              <div class="popup-botton" style="text-align: right;padding: 16px;">`
+                // +`<button class='popup-Ok' style="background: #2dac37;border: 1px solid #dcdfe6;color: #fff;padding: 6px 12px;border-radius: 4px;cursor:pointer;">已完成支付</button>`
+                +`<button class='popup-out' style="background: #fff;border: 1px solid #dcdfe6;padding: 6px 12px;border-radius: 4px;margin-left: 10px;cursor:pointer;">关闭</button>
+              </div>
+            </div>
+          </div>
+        `)
+        
+        
+        $('body').append(dome);// 添加到 页面最 后面 
+        
+        $(dome).find(".popup-Ok").on('click',()=>{ // 添加关闭功能
+          DemoRemove(); // 关闭后
+          // 这里放对应的刷新功能
+        });
+        $(dome).find(".popup-out").on('click',()=>{ // 添加关闭功能
+          DemoRemove(); // 关闭后
+        });
+        // 关闭窗口，校验计时器等
+        function DemoRemove(){
+          dome.remove(); // 关闭后
+        };
+        
+      };
+      
+      
+        // get_blob_url();
+      
+      
+        
+      
+      
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       let downlurl = "http://filedev.520shq.com/acbdaf0e-0301-4521-87ea-cdc99a988562微信图片_20220120141535.zip";

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>点不到的</title>
+    
+    
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/vue.js"></script>
+    
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    
+    <style>
+      .box{
+        width: 100px;
+        height: 100px;
+        background-color: antiquewhite;
+        display: inline-block;
+        border: 1px solid sienna;
+        cursor: pointer;
+        font-size: 24px;
+        text-align: center;
+        line-height: 100px;
+      }
+      .box.active{
+        transition: .5s;
+        background-color: lawngreen;
+      }
+      .inspade span{
+        display: inline-block;
+        vertical-align: top;
+        
+        margin-right: 10px;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div class="box-box">
+      <div class="box box1" onclick="box_game.onClick(1)">A</div>
+      <div class="box box2" onclick="box_game.onClick(2)">S</div>
+      <div class="box box3" onclick="box_game.onClick(3)">D</div>
+      <div class="box box4" onclick="box_game.onClick(4)">F</div>
+      
+      
+      <div class="mark">点击下方开始</div>
+      <button onclick="box_game.ReadyGo()">'开始吧'</button>
+      
+      
+      <div id="app">
+        <div>
+          {{gpp}}
+        </div>
+        <!-- 一级为0的全部列出来 -->
+        <div v-for="(item,index) in listA" :key="index" style="display: inline-block;margin-right: 10px;">
+          {{item.name}}
+            <el-button type="text" @click="click1(item.id,1,item)"> 查看</el-button>
+            <!-- <el-button type="text"> 组合</el-button> -->
+        </div>
+        
+        <!-- <Instal></Instal> -->
+        <div class="inspade" v-if="DataList.name">
+          <span>
+            {{DataList.name}} 
+            <br>
+            <el-button type="text"> 添加</el-button>
+            <el-button type="text"> 组合</el-button>
+          </span>
+          <span style="display: inline-block;">
+            <div v-for="(item,index) in DataList.pArr" :key="index">
+              <span>--|>{{item.name}}</span>
+              <span style="display: inline-block;">
+                <div v-for="(item1,index1) in item.pArr" :key="index1"> 
+                  <span> ---||>{{item1.name}}</span>
+                  <span style="display: inline-block;">
+                    <div v-for="(item2,index2) in item1.pArr" :key="index2"> 
+                      <span> -----||>{{item2.name}}</span>
+                    </div>
+                  </span>
+                </div>
+              </span>
+            </div>
+          </span>
+        </div>
+        
+        
+        
+        
+        
+      </div>
+      
+    </div>
+    <script>
+      // 计算
+      // 数据结构设计
+        // 应用 - 某 游戏的一种搭配设计
+      // import Instal from "./common/instal.vue";
+      // console.log(Instal);
+      
+      let bbjson = [
+        {
+          id:1,
+          pid:[2], // 下级素材id集合
+          Uid:0, // 前一级id
+          name:'mini1号' // 素材名称
+        },
+        {
+          id:2,
+          pid:[], // 下级素材id集合
+          Uid:1, // 前一级id
+          name:'mini2号' // 素材名称
+        },
+        {
+          id:10,
+          pid:[], // 下级素材id集合
+          Uid:1, // 前一级id
+          name:'mini 10号' // 素材名称
+        },
+        {
+          id:14,
+          pid:[], // 下级素材id集合
+          Uid:10, // 前一级id
+          name:'mini 14号' // 素材名称
+        },
+        {
+          id:15,
+          pid:[], // 下级素材id集合
+          Uid:14, // 前一级id
+          name:'mini 15号' // 素材名称
+        },
+        {
+          id:3,
+          pid:[], // 下级素材id集合
+          Uid:2, // 前一级id
+          name:'mini3号' // 素材名称
+        },
+        {
+          id:13,
+          pid:[], // 下级素材id集合
+          Uid:2, // 前一级id
+          name:'mini 13号' // 素材名称
+        },
+        
+        {
+          id:24,
+          pid:[25], // 下级素材id集合
+          Uid:0, // 前一级id
+          name:'size1号' // 素材名称
+        },
+        {
+          id:25,
+          pid:[], // 下级素材id集合
+          Uid:24, // 前一级id
+          name:'size2号' // 素材名称
+        }
+      ]
+      let fuseList=[ // 融合对象
+        {id:1,
+          Uid:3,// 查询合成对象
+          ids:[1,4], // 合成素材 id
+          condition:'需要min1号和size1号' // 条件说明
+        }
+      ]
+      
+      var app= new Vue({
+        el:'#app',
+        components: {
+          // Instal
+        },
+        data:{
+          gpp:'狗屁屁',
+          fuseList:fuseList,
+          bbjson:bbjson,
+          listA:[],// 初级元素
+          
+          DataList:{} // 查看的数据
+        },
+        created(){
+          this.bbjson.forEach(item=>{
+            if(item.Uid==0){
+              this.forClick(item);
+              this.listA.push(item);
+            }
+          })
+          
+          console.log(this.listA,'打印1')
+        },
+        mounted(){
+          
+        },
+        methods: {
+          // 从一级开始添加下一级的数据
+          forClick(obj){
+            let parr = [];
+            this.bbjson.forEach(item=>{
+              if(item.Uid==obj.id){
+                this.forClick(item);
+                parr.push(item)
+              }
+            })
+            obj.pArr = parr;
+          },
+          
+          click1(id,val,obj) {
+            // 获取查询数据
+            if(val == 1){ // 查询当前数据的 发展路线
+              this.DataList = obj;
+              
+              
+            }
+            if(val == 2){ // 查询当前元素合成来源
+              
+            }
+            if(val == 3){ // 查询当前元素可合成路线
+              
+            }
+          }
+        }
+        
+      })
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      let box_game={
+        
+        mark:0, // 点到对应的加 点错了扣除
+        Nomark:0, // 点到对应的加 点错了扣除
+        num:1,// 需要点击第几个
+        numNo:2,// 不能点击第几个
+        boxLength:4,// 盒子数量
+        timeNum:60,// 新的数据什么时候显示
+        isOff:false, // 是否开始
+        init(){
+          console.log('初始化');
+        },
+        ReadyGo(){ // 预备开始
+          this.isOff = true;
+          this.get_num();
+          
+        },
+        
+        get_num(){ // 生成随机数
+            let num = Math.round(Math.random()*3)+1;
+            if(this.num==num){ // 不予许重复
+              this.get_num();
+              return;
+            }
+            this.num = num; // 重置一下数据1
+            this.remove_boxdiv();
+        },
+        remove_boxdiv(){
+          $(".box").removeClass('active');
+          // 计时开启
+          setTimeout(()=>{
+            console.log('计时触发')
+            this.isOff = true;
+            $(".box"+this.num).addClass('active');
+          },this.timeNum)
+        },
+        // 计时清零重新开始
+        num_ove(){
+          
+          
+        },
+        
+        
+        
+        // 点击后
+        onClick(val){
+          if(!this.isOff){
+            return;
+          }
+          if(val==this.num){
+            this.get_num()
+            this.mark++
+          }else{
+            this.mark--
+            this.Nomark ++ 
+          }
+          $('.mark').html('正确点击数：'+this.mark+',点击错误次数：'+this.Nomark);
+        },
+      }
+      
+      box_game.init();
+      
+      let than = box_game;
+      // 键盘点击监听
+      document.addEventListener('keypress',function(e){
+        console.log(e,'键盘事件')
+        if(e.code=='KeyA'||e.code=='KeyS'||e.code=='KeyD'||e.code=='KeyF'){
+          if(e.code=='KeyA'){than.onClick(1)}
+          if(e.code=='KeyS'){than.onClick(2)}
+          if(e.code=='KeyD'){than.onClick(3)}
+          if(e.code=='KeyF'){than.onClick(4)}
+        }
+      })
+      
+    </script>
+  </body>
+</html>
